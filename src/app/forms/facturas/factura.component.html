@@ -1,0 +1,70 @@
+<h2>Generador de facturas</h2>
+
+<form [formGroup]="facturaForm" (ngSubmit)="onSubmit()" novalidate>
+    <fieldset>
+      <label for="numeroFactura">Número de factura:</label>
+      <input id="numeroFactura" formControlName="numeroFactura" />
+      @if (facturaForm.get('numeroFactura')?.touched && facturaForm.get('numeroFactura')?.invalid) {
+        @if (facturaForm.get('numeroFactura')?.errors?.['required']) {
+          <span>Obligatorio</span>
+        }
+        @if (facturaForm.get('numeroFactura')?.errors?.['formatoFactura']) {
+          <span>Formato: FAC-XXXXXX (6 dígitos)</span>
+        }
+      }
+    </fieldset>
+
+    <fieldset>
+      <label for="fecha">Fecha:</label>
+      <input id="fecha" type="date" formControlName="fecha" />
+    </fieldset>
+
+    <fieldset>
+      <label for="cliente">Cliente:</label>
+      <input id="cliente" formControlName="cliente" />
+      @if (facturaForm.get('cliente')?.touched && facturaForm.get('cliente')?.invalid) {
+        @if (facturaForm.get('cliente')?.errors?.['required']) {
+          <span>Obligatorio</span>
+        }
+        @if (facturaForm.get('cliente')?.errors?.['minlength']) {
+          <span>Mínimo 3 caracteres</span>
+        }
+      }
+    </fieldset>
+
+    <section class="detalles">
+      <h3>Detalles de factura</h3>
+
+      <div formArrayName="detalles">
+        @for (detalle of detalles.controls) {
+          <div [formGroup]="detalle" class="detalle-item">
+            <label>Producto:</label>
+            <input formControlName="producto" />
+
+            <label>Cantidad:</label>
+            <input type="number" formControlName="cantidad" />
+
+            <label>Precio unitario (€):</label>
+            <input type="number" step="0.01" formControlName="precioUnitario" />
+
+            <label>Descuento (%):</label>
+            <input type="number" formControlName="descuento" />
+
+            <button type="button" (click)="eliminarDetalle(detalles.controls.indexOf(detalle))">Eliminar</button>
+          </div>
+        }
+      </div>
+
+      <button type="button" (click)="agregarDetalle()">Añadir detalle</button>
+    </section>
+
+    <section class="resumen">
+      <p>Subtotal: {{ calcularSubtotal() | currency:'EUR':'symbol':'1.2-2' }}</p>
+      <p>IVA (21%): {{ calcularIVA() | currency:'EUR':'symbol':'1.2-2' }}</p>
+      <p>Total: {{ calcularTotal() | currency:'EUR':'symbol':'1.2-2' }}</p>
+    </section>
+
+    <footer class="acciones">
+      <button type="submit">Guardar factura</button>
+    </footer>
+</form>

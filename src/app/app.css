@@ -1,0 +1,36 @@
+.enlaces-practicas {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 560px;
+  margin: 16px;
+}
+
+.boton {
+  display: inline-block;
+  padding: 8px 14px;
+  border-radius: 6px;
+  text-decoration: none;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.boton:focus {
+  outline: 3px solid rgba(0,0,0,0.12);
+  outline-offset: 2px;
+}
+
+.boton-registro { background: #2b6cb0; }
+.boton-registro:hover { background: #245a94; }
+
+.boton-productos { background: #38a169; }
+.boton-productos:hover { background: #2f8956; }
+
+.boton-factura { background: #dd6b20; }
+.boton-factura:hover { background: #c75c1b; }
+
+.boton-avanzado { background: #6b46c1; }
+.boton-avanzado:hover { background: #5a3bb0; }
+
+.boton-perfil { background: #e53e3e; }
+.boton-perfil:hover { background: #c83636; }

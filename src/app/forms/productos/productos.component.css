@@ -1,0 +1,78 @@
+:host {
+  display: block;
+  max-width: 900px;
+  margin: 0 auto;
+  font-family: Arial, sans-serif;
+}
+
+form > fieldset {
+  border: 1px solid #e6e6e6;
+  padding: 12px 16px;
+  margin-bottom: 14px;
+  border-radius: 6px;
+  background: #fafafa;
+}
+
+label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 700;
+  color: #333;
+}
+
+input, textarea {
+  padding: 8px 10px;
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #dcdcdc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+producto.error {
+  display: block;
+  color: #b00020;
+  margin-top: 6px;
+  font-size: 13px;
+}
+
+.listado-productos {
+  margin-top: 18px;
+}
+
+.tabla-productos {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 12px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.tabla-productos th, .tabla-productos td {
+  padding: 10px 12px;
+  text-align: left;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.tabla-productos thead th {
+  background: linear-gradient(180deg,#f7f7f8,#f1f1f2);
+  font-weight: 700;
+}
+
+.tabla-productos tbody tr:nth-child(even) {
+  background: #fbfbfb;
+}
+
+.acciones { text-align: right; margin-top: 6px; }
+
+button {
+  padding: 8px 12px;
+  border-radius: 5px;
+  color: black;
+  cursor: pointer;
+}
+
+button:hover { 
+  filter: brightness(0.95); 
+}
