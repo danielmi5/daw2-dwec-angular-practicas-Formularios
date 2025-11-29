@@ -1,0 +1,71 @@
+<h2>Registro avanzado con validación asincrónica</h2>
+
+<form [formGroup]="registroForm" (ngSubmit)="onSubmit()" novalidate>
+  <fieldset>
+    <label for="username">Username:</label>
+    <input id="username" formControlName="username" />
+    @if (mostrarCargando('username')) {
+      <small>Verificando...</small>
+    }
+    @if (validarCampo('username')) {
+      @if (registroForm.get('username')?.errors?.['required']) {
+        <small class="error">Requerido</small>
+      }
+      @if (registroForm.get('username')?.errors?.['minlength']) {
+        <small class="error">Mínimo 3 caracteres</small>
+      }
+      @if (registroForm.get('username')?.errors?.['usernameReservado']) {
+        <small class="error">Username no disponible (reservado)</small>
+      }
+    }
+  </fieldset>
+
+  <fieldset>
+    <label for="email">Email:</label>
+    <input id="email" formControlName="email" />
+    @if (mostrarCargando('email')) {
+      <small>Verificando disponibilidad...</small>
+    }
+    @if (validarCampo('email')) {
+      @if (registroForm.get('email')?.errors?.['required']) {
+        <small class="error">Requerido</small>
+      }
+      @if (registroForm.get('email')?.errors?.['email']) {
+        <small class="error">Email inválido</small>
+      }
+      @if (registroForm.get('email')?.errors?.['emailExiste']) {
+        <small class="error">Este email ya está registrado</small>
+      }
+    }
+  </fieldset>
+
+  <fieldset>
+    <label for="password">Contraseña:</label>
+    <input id="password" type="password" formControlName="password" />
+    @if (validarCampo('password')) {
+      @if (registroForm.get('password')?.errors?.['required']) {
+        <small class="error">Requerida</small>
+      }
+      @if (registroForm.get('password')?.errors?.['minlength']) {
+        <small class="error">Mínimo 8 caracteres</small>
+      }
+    }
+  </fieldset>
+
+  <fieldset>
+    <label>
+      <input type="checkbox" formControlName="terminos" /> Acepto los términos y condiciones
+    </label>
+    @if (validarCampo('terminos')) {
+      <small class="error">Debes aceptar los términos</small>
+    }
+  </fieldset>
+
+  <footer class="acciones">
+    <button type="submit">{{ enviando ? 'Registrando...' : 'Crear cuenta' }}</button>
+  </footer>
+
+  @if (registroForm.pending) {
+    <p>Validando información...</p>
+  }
+</form>

@@ -1,0 +1,6 @@
+:host { display:block; max-width:700px; margin:0 auto; font-family: Arial, sans-serif; }
+fieldset { border:1px solid #e6e6e6; padding:10px; margin-bottom:10px; border-radius:6px; background:#fafafa }
+label { display:block; font-weight:700; margin-bottom:6px }
+input[type="text"], input[type="email"], input[type="password"] { width:100%; padding:8px; box-sizing:border-box; border:1px solid #dcdcdc; border-radius:4px }
+.error { color:#b00020 }
+.acciones { text-align:right; margin-top:10px }

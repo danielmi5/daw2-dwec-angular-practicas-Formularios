@@ -88,7 +88,7 @@ export class FacturaComponent implements OnInit {
       console.log('Factura:', factura);
       alert('Factura guardada correctamente');
     } else {
-      alert('Completa todos los campos requeridos y agrega al menos un detalle');
+      alert('Completa todos los campos requeridos y añade al menos un detalle a la factura');
     }
   }
 }

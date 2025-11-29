@@ -1,0 +1,43 @@
+:host { 
+    display:block; 
+    max-width:800px; 
+    margin:0 auto; font-family:Arial, sans-serif 
+}
+
+section { 
+    border:1px solid #e6e6e6; 
+    padding:12px; 
+    margin-bottom:12px; 
+    border-radius:6px; 
+    background:#fafafa 
+}
+
+label { 
+    display:block; 
+    font-weight:700; 
+    margin-top:8px 
+}
+
+input, select { 
+    width:100%; 
+    padding:8px; 
+    box-sizing:border-box; 
+    border:1px solid #dcdcdc; border-radius:4px 
+}
+
+.direccion-item { 
+    padding:10px 0; 
+    border-bottom:1px dashed #eee 
+}
+
+.acciones { 
+    text-align:right 
+}
+
+.error { 
+    color:#b00020 
+}
+
+.resumen p { 
+    font-weight:700 
+}

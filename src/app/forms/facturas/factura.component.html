@@ -36,8 +36,8 @@
       <h3>Detalles de factura</h3>
 
       <div formArrayName="detalles">
-        @for (detalle of detalles.controls) {
-          <div [formGroup]="detalle" class="detalle-item">
+        @for (detalle of detalles.controls; track detalles.controls.indexOf(detalle)) {
+          <div [formGroup]="$any(detalle)" class="detalle-item">
             <label>Producto:</label>
             <input formControlName="producto" />
 
@@ -50,7 +50,9 @@
             <label>Descuento (%):</label>
             <input type="number" formControlName="descuento" />
 
-            <button type="button" (click)="eliminarDetalle(detalles.controls.indexOf(detalle))">Eliminar</button>
+            <div class="acciones-detalle">
+              <button type="button" (click)="eliminarDetalle(detalles.controls.indexOf(detalle))">Eliminar</button>
+            </div>
           </div>
         }
       </div>

@@ -1,0 +1,85 @@
+<h2>Perfil de usuario completo</h2>
+
+<form [formGroup]="perfilForm" (ngSubmit)="onSubmit()" novalidate>
+  <section formGroupName="informacionPersonal">
+    <h3>Información personal</h3>
+
+    <label>Nombre:</label>
+    <input formControlName="nombre" />
+    @if (informacionPersonal.get('nombre')?.touched && informacionPersonal.get('nombre')?.invalid) {
+      @if (informacionPersonal.get('nombre')?.errors?.['required']) {
+        <small class="error">Nombre requerido (mínimo 2 caracteres)</small>
+      }
+    }
+
+    <label>Apellido:</label>
+    <input formControlName="apellido" />
+    @if (informacionPersonal.get('apellido')?.touched && informacionPersonal.get('apellido')?.invalid) {
+      @if (informacionPersonal.get('apellido')?.errors?.['required']) {
+        <small class="error">Apellido requerido (mínimo 2 caracteres)</small>
+      }
+    }
+
+    <label>Fecha de nacimiento:</label>
+    <input type="date" formControlName="fechaNacimiento" />
+    <p>Edad: {{ calcularEdad() }} años</p>
+
+    <label>Teléfono:</label>
+    <input formControlName="telefono" />
+    @if (informacionPersonal.get('telefono')?.touched && informacionPersonal.get('telefono')?.invalid) {
+      <small class="error">Teléfono inválido (mínimo 9 dígitos)</small>
+    }
+  </section>
+
+  <section class="direcciones">
+    <h3>Direcciones ({{ direcciones.length }})</h3>
+
+    <div formArrayName="direcciones">
+      @for (direccion of direcciones.controls; track direcciones.controls.indexOf(direccion)) {
+        <div [formGroupName]="direcciones.controls.indexOf(direccion)" class="direccion-item">
+          <h4>Dirección {{ direcciones.controls.indexOf(direccion) + 1 }}</h4>
+
+          <label>Tipo:</label>
+          <select formControlName="tipo">
+            @for (tipo of tiposDireccion; track tiposDireccion.indexOf(tipo)) {
+              <option [value]="tipo">{{ tipo }}</option>
+            }
+          </select>   
+
+          <label>Calle:</label>
+          <input formControlName="calle" />
+          @if (direcciones.at(direcciones.controls.indexOf(direccion)).get('calle')?.touched && direcciones.at(direcciones.controls.indexOf(direccion)).get('calle')?.invalid) {
+            <small class="error">Mínimo 5 caracteres</small> 
+          }
+
+          <label>Ciudad:</label>
+          <input formControlName="ciudad" />
+
+          <label>Código Postal:</label>
+          <input formControlName="codigoPostal" />
+          @if (direcciones.at(direcciones.controls.indexOf(direccion)).get('codigoPostal')?.touched && direcciones.at(direcciones.controls.indexOf(direccion)).get('codigoPostal')?.invalid) {
+            <small class="error">Formato: 5 dígitos</small>
+          }
+
+          <label>País:</label>
+          <input formControlName="pais" />
+
+          <div class="acciones-direccion">
+            <button type="button" (click)="eliminarDireccion(direcciones.controls.indexOf(direccion))">Eliminar dirección</button>
+          </div>
+        </div>
+      }
+    </div>
+
+    <button type="button" (click)="agregarDireccion()">+ Añadir otra dirección</button>
+  </section>
+
+  <section class="resumen">
+    <h3>Resumen del perfil</h3>
+    <p>{{ generarResumen() }}</p>
+  </section>
+
+  <footer class="acciones">
+    <button type="submit">Guardar perfil</button>
+  </footer>
+</form>
